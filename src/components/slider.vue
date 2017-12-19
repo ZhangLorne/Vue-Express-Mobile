@@ -1,7 +1,8 @@
 <template>
   <mt-swipe :auto="4000" style="height: 25rem">
-    <mt-swipe-item v-for="imgItem in imgList" class="mint-swipe-item">
-      <img :src="imgItem" alt="">
+    <mt-swipe-item v-for="imgItem in titleList" class="mint-swipe-item">
+      <img :src="imgItem.img" alt="">
+      <div style="position: absolute;top:230px;font-size: 20px;left:25px;color: #fff">{{imgItem.title}}</div>
     </mt-swipe-item>
   </mt-swipe>
 </template>
@@ -10,7 +11,9 @@
   export default {
     data () {
       return {
-        imgList:[]
+        titleList:[
+
+        ],
       }
     },
     created(){
@@ -19,10 +22,16 @@
     methods: {
       findDaily(){
         this.api.findDaily({},(d)=>{
-          var newary=d.slice(0, 3);
+          var newary=d.slice(0, 5);
           for (var value of newary) {
-            this.imgList.push(value.imgTit);
+            var jsonData={
+              img:"http://localhost:3000/"+value.fliename,
+              title:value.title
+            }
+            this.titleList.push(jsonData);
+//            this.titleList.push(value.title);
           }
+
         })
       }
     },

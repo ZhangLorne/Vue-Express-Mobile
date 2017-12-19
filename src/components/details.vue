@@ -9,7 +9,7 @@
          </p>
        </div>
        <div class="detail-box-img">
-         <img :src="items.items" alt="">
+         <img :src="'http://localhost:3000/'+items.fliename" alt="">
        </div>
      </li>
    </ul>
@@ -21,6 +21,7 @@
         data() {
             return {
               newsList:[]
+
             }
         },
         created(){
@@ -29,8 +30,7 @@
         methods: {
           findDaily(){
             this.api.findDaily({},(d)=>{
-              this.newsList=d
-              console.log(this.newsList)
+              this.newsList=d.reverse()
             })
           }
         },
